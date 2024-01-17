@@ -7,7 +7,7 @@ snp2h5 --chrom chromInfo \
         all_snp1.vcf.gz
 
 
-#Flagging mapped reads with WASP"
+#Flagging mapped reads with WASP
 python3 find_intersecting_snps.py \
 --output_dir out_path --snp_index snp_index.h5 \
 --snp_tab snp_tab.h5 --haplotype haplotypes.h5 \
