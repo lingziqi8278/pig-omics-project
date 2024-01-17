@@ -1,5 +1,5 @@
 #Causal inference for H3K27ac and gene expression
-snp <- read.table("potential_casual_snp_from_colocalization.raw",header=T,sep=" ",check.names = F) #0,1 file
+snp <- read.table("potential_casual_snp_from_colocalization.raw",header=T,sep=" ",check.names = F) 
 gene_expression <- read.table("gene-TMM.bed",header=T)
 peak_signal <- read.table("ac-TMM.bed",header=T)
 colo <- read.table("colocalization_acQTL_eQTL.txt",header=T,sep="\t")
