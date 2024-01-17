@@ -16,8 +16,8 @@ CausalityTestJM = function(LL,GG,TT){
 	dfL = length(llevels) - 1
 	pvec = rep(NA,4)
 	if(dfL == 2){
-	dat_f$L1 = ifelse(dat_f$L == 1,1,0)    #杂合为1，纯合为0
-	dat_f$L2 = ifelse(dat_f$L == 2,1,0)    #纯显性为1，其他为0
+	dat_f$L1 = ifelse(dat_f$L == 1,1,0)    
+	dat_f$L2 = ifelse(dat_f$L == 2,1,0)    
 	fit0 = lm(T ~ 1,data=dat_f)
 	fit1 = lm(T ~ L1 + L2,data=dat_f)
 	fit2 = lm(G ~ T,data=dat_f)
