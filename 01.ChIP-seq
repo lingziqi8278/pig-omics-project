@@ -1,0 +1,12 @@
+#Mapping single-end reads with aln algorithm
+
+REF=Sscrofa11.1.fa
+LIBRARY="ChIP" 
+LANE="L1"
+RG="@RG\\tID:${NAME}_${LIBRARY}_${LANE}\\tLB:${NAME}_${LIBRARY}\\tPL:ILLUMINA\\tSM:${NAME}"
+
+BWA aln -t 10 -q 15 ${REF} ${NAME}_ac_R1.fq.gz > ${NAME}.sai
+BWA samse -r $RG ${REF} ${NAME}.sai ${NAME}_ac_R1.fq.gz > ${NAME}.sam 
+Samtools view -q 1 -bSu ${NAME}.sam > ${NAME}_tmp.bam
+Samtools sort ${NAME}_tmp.bam -O bam -o ${NAME}_sorted.bam  
+Samtools index ${NAME}_sorted.bam  
