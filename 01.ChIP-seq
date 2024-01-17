@@ -26,3 +26,8 @@ MACS filterdup -i ${Sample}_ac_final_sort.bam -f BAM -g hs --keep-dup=1 --verbos
 MACS predictd -i ${name}_filterdup.bed -g 2.50e9 > ${name}_temp.txt 2>&1
 MACS callpeak -t ${Sample}_ac_final_sort.bam -c ${Sample}_input_final_sort.bam \
 -n ${Sample}_ac -g 2.50e9  -p 1e-2 -f BAM --nomodel --extsize ${name}_temp --keep-dup all -B --SPMR
+
+#peak activity
+
+bedtools multicov -bams ${Sample}_ac_final_sort.bam -bed consensus_peak.txt > name_depth.bed
+
