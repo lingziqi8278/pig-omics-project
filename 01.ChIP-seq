@@ -1,5 +1,4 @@
 #Mapping single-end reads with aln algorithm
-
 REF=Sscrofa11.1.fa
 LIBRARY="ChIP" 
 LANE="L1"
@@ -12,21 +11,17 @@ Samtools sort ${NAME}_tmp.bam -O bam -o ${NAME}_sorted.bam
 Samtools index ${NAME}_sorted.bam  
 
 #unique mapped reads
-
 sambamba view -h -t 2 -f bam \
 -F "mapping_quality >= 1 and not (unmapped or secondary_alignment) and not ([XA] != null or [SA] != null)" ${Bam_file} > ${name}_input_R1_sorted_unique.bam
 
 #remove duplicate reads
-
 ${PICARD}/MarkDuplicates.jar INPUT=${Bam_file} OUTPUT=${name}_dupmark.bam METRICS_FILE=${name}_dup.qc \
 VALIDATION_STRINGENCY=LENIENT ASSUME_SORTED=true REMOVE_DUPLICATES=false
-
 samtools view -F 1804 -b ${name}_dupmark.bam -o ${name}_final.bam
 samtools sort ${name}_final.bam -O bam -o ${name}_final_sort.bam
 samtools index ${name}_final_sort.bam
 
 #call peak
-
 MACS filterdup -i ${Sample}_ac_final_sort.bam -f BAM -g hs --keep-dup=1 --verbose=3 -o ${name}_filterdup.bed
 MACS predictd -i ${name}_filterdup.bed -g 2.50e9 > ${name}_temp.txt 2>&1
 MACS callpeak -t ${Sample}_ac_final_sort.bam -c ${Sample}_input_final_sort.bam \
